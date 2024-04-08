@@ -10,6 +10,7 @@ export const RUNTIME_CONFIG_DOM = "danger-runtime-config";
 
 export const DEFAULT_API_HOST = "https://api.nextchat.dev";
 export const OPENAI_BASE_URL = "https://api.openai.com";
+export const ANTHROPIC_BASE_URL = "https://api.anthropic.com";
 
 export const GEMINI_BASE_URL = "https://generativelanguage.googleapis.com/";
 
@@ -23,8 +24,9 @@ export enum Path {
 }
 
 export enum ApiPath {
-  Cors = "/api/cors",
+  Cors = "",
   OpenAI = "/api/openai",
+  Anthropic = "/api/anthropic",
 }
 
 export enum SlotID {
@@ -67,12 +69,21 @@ export enum ServiceProvider {
   OpenAI = "OpenAI",
   Azure = "Azure",
   Google = "Google",
+  Anthropic = "Anthropic",
 }
 
 export enum ModelProvider {
   GPT = "GPT",
   GeminiPro = "GeminiPro",
+  Claude = "Claude",
 }
+
+export const Anthropic = {
+  ChatPath: "v1/messages",
+  ChatPath1: "v1/complete",
+  ExampleEndpoint: "https://api.anthropic.com",
+  Vision: "2023-06-01",
+};
 
 export const OpenaiPath = {
   ChatPath: "v1/chat/completions",
@@ -94,12 +105,20 @@ export const Google = {
 };
 
 export const DEFAULT_INPUT_TEMPLATE = `{{input}}`; // input / time / model / lang
+// export const DEFAULT_SYSTEM_TEMPLATE = `
+// You are ChatGPT, a large language model trained by {{ServiceProvider}}.
+// Knowledge cutoff: {{cutoff}}
+// Current model: {{model}}
+// Current time: {{time}}
+// Latex inline: $x^2$
+// Latex block: $$e=mc^2$$
+// `;
 export const DEFAULT_SYSTEM_TEMPLATE = `
 You are ChatGPT, a large language model trained by {{ServiceProvider}}.
 Knowledge cutoff: {{cutoff}}
 Current model: {{model}}
 Current time: {{time}}
-Latex inline: $x^2$ 
+Latex inline: \(x^2\) 
 Latex block: $$e=mc^2$$
 `;
 
@@ -108,9 +127,9 @@ export const GEMINI_SUMMARIZE_MODEL = "gemini-pro";
 
 export const KnowledgeCutOffDate: Record<string, string> = {
   default: "2021-09",
-  "gpt-4-turbo-preview": "2023-04",
+  "gpt-4-turbo-preview": "2023-12",
   "gpt-4-1106-preview": "2023-04",
-  "gpt-4-0125-preview": "2023-04",
+  "gpt-4-0125-preview": "2023-12",
   "gpt-4-vision-preview": "2023-04",
   // After improvements,
   // it's now easier to add "KnowledgeCutOffDate" instead of stupid hardcoding it, as was done previously.
@@ -287,6 +306,60 @@ export const DEFAULT_MODELS = [
       id: "google",
       providerName: "Google",
       providerType: "google",
+    },
+  },
+  {
+    name: "claude-instant-1.2",
+    available: true,
+    provider: {
+      id: "anthropic",
+      providerName: "Anthropic",
+      providerType: "anthropic",
+    },
+  },
+  {
+    name: "claude-2.0",
+    available: true,
+    provider: {
+      id: "anthropic",
+      providerName: "Anthropic",
+      providerType: "anthropic",
+    },
+  },
+  {
+    name: "claude-2.1",
+    available: true,
+    provider: {
+      id: "anthropic",
+      providerName: "Anthropic",
+      providerType: "anthropic",
+    },
+  },
+  {
+    name: "claude-3-opus-20240229",
+    available: true,
+    provider: {
+      id: "anthropic",
+      providerName: "Anthropic",
+      providerType: "anthropic",
+    },
+  },
+  {
+    name: "claude-3-sonnet-20240229",
+    available: true,
+    provider: {
+      id: "anthropic",
+      providerName: "Anthropic",
+      providerType: "anthropic",
+    },
+  },
+  {
+    name: "claude-3-haiku-20240307",
+    available: true,
+    provider: {
+      id: "anthropic",
+      providerName: "Anthropic",
+      providerType: "anthropic",
     },
   },
 ] as const;
